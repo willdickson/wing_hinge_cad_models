@@ -71,13 +71,18 @@ worldbody:
         children: 
           - 
             label: ax1_and_vein_001
+            density: 0.1
             joint:
               type: ball 
               parameters:
                 limited: false
                 springref: 0
-                stiffness: 1.0e3
+                stiffness: 1.0e5
                 damping: 1.0e3
+            children:
+              - 
+                label: wing_001
+                density: 0.1
 
 
 equality:
