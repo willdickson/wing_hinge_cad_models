@@ -22,8 +22,7 @@ worldbody:
           type: hinge
           parameters:
             axis: SlaJointDatumLine
-            range: [-1.57, 1.57]
-            limited: true
+            limited: false 
             springref: 0
         children: 
           - 
@@ -33,7 +32,7 @@ worldbody:
               parameters:
                 limited: false
                 springref: 0
-                stiffness: 1.0e9
+                stiffness: 5.0e9
                 damping: 1.0e7
 
       - 
@@ -42,8 +41,7 @@ worldbody:
           type: slide
           parameters:
             axis: ScuJointDatumLine
-            range: [-50.0, 40.0]
-            limited: true
+            limited: false 
             springref: 0
         children: 
           - 
@@ -53,36 +51,34 @@ worldbody:
               parameters:
                 limited: false
                 springref: 0
-                stiffness: 1.0e9
+                stiffness: 5.0e9
                 damping: 1.0e7
                 
       - 
         label: pwp_001
-        joint: 
-          type: slide
-          parameters:
-            axis: PwpJointDatumLine
-            range: [-50.0, 40.0]
-            limited: true
-            springref: 0
-            stiffness: 1.0e12
-            damping: 1.0e12
+        #joint: 
+          #type: slide
+          #parameters:
+          #  axis: PwpJointDatumLine
+          #  #range: [-50.0, 40.0]
+          #  limited: false
+          #  springref: 0
 
         children: 
           - 
             label: ax1_and_vein_001
-            density: 0.1
+            density: 0.0001
             joint:
               type: ball 
               parameters:
                 limited: false
                 springref: 0
-                stiffness: 1.0e5
-                damping: 1.0e3
+                stiffness: 0.1
+                damping: 0.1
             children:
               - 
                 label: wing_001
-                density: 0.1
+                density: 0.0001
 
 
 equality:
@@ -93,6 +89,7 @@ equality:
       body1: mu1_001
       body2: ax1_and_vein_001
       anchor: ScuBallCenterDatumPoint
+      solimp: [0.9999999, 0.9999999, 0.001, 0.5, 2.0] 
 
   -
     type: connect
@@ -100,6 +97,7 @@ equality:
       body1: mu1_002
       body2: ax1_and_vein_001
       anchor: SlaBallCenterDatumPoint
+      solimp: [0.9999999, 0.9999999, 0.001, 0.5, 2.0] 
 
 
 actuator:
@@ -144,22 +142,22 @@ actuator:
       ctrllimited: false
       kv: 1.0e8
 
-  -
-    type: position
-    parameters:
-      name: pwp_001_position
-      joint: pwp_001_joint
-      gear: 1
-      forcelimited: false
-      ctrllimited: false
-      kp: 6.0e8
-
-  -
-    type: velocity
-    parameters:
-      name: pwp_001_velocity
-      joint: pwp_001_joint
-      gear: 1
-      forcelimited: false
-      ctrllimited: false
-      kv: 1.0e8
+#  -
+#    type: position
+#    parameters:
+#      name: pwp_001_position
+#      joint: pwp_001_joint
+#      gear: 1
+#      forcelimited: false
+#      ctrllimited: false
+#      kp: 6.0e8
+#
+#  -
+#    type: velocity
+#    parameters:
+#      name: pwp_001_velocity
+#      joint: pwp_001_joint
+#      gear: 1
+#      forcelimited: false
+#      ctrllimited: false
+#      kv: 1.0e8
