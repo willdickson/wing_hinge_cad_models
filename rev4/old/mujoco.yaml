@@ -8,10 +8,12 @@ option:
 worldbody: 
 
   body_tree:
+
     label: mount_plate_001
     joint: 
       type: freejoint
       position: WorldBodyDatumPoint
+
     children:
       - 
         label: sla_001
@@ -31,6 +33,7 @@ worldbody:
                 springref: 0
                 stiffness: 5.0e9
                 damping: 1.0e7
+
       - 
         label: scu_001
         joint: 
@@ -49,8 +52,17 @@ worldbody:
                 springref: 0
                 stiffness: 5.0e9
                 damping: 1.0e7
+                
       - 
         label: pwp_001
+        #joint: 
+          #type: slide
+          #parameters:
+          #  axis: PwpJointDatumLine
+          #  #range: [-50.0, 40.0]
+          #  limited: false
+          #  springref: 0
+
         children: 
           - 
             label: ax1_and_vein_001
@@ -72,8 +84,8 @@ worldbody:
                     axis:  [0.0, 0.0, -1.0]
                     limited: false
                     springref: 0
-                    stiffness: 0.1 
-                    damping: 0.1 
+                    stiffness: 0.1
+                    damping: 0.1
               - 
                 type: hinge
                 label: theta 
@@ -83,12 +95,29 @@ worldbody:
                     springref: 0
                     stiffness: 0.1
                     damping: 0.1
+
             children:
               - 
                 label: wing_001
                 density: 0.0001
 
+          #- 
+          #  label: ax1_and_vein_001
+          #  density: 0.0001
+          #  joint:
+          #    type: ball 
+          #    parameters:
+          #      limited: false
+          #      springref: 0
+          #      stiffness: 0.1
+          #      damping: 0.1
+          #  children:
+          #    - 
+          #      label: wing_001
+          #      density: 0.0001
+
 equality:
+
   -
     type: connect
     parameters:
@@ -148,3 +177,22 @@ actuator:
       ctrllimited: false
       kv: 1.0e8
 
+#  -
+#    type: position
+#    parameters:
+#      name: pwp_001_position
+#      joint: pwp_001_joint
+#      gear: 1
+#      forcelimited: false
+#      ctrllimited: false
+#      kp: 6.0e8
+#
+#  -
+#    type: velocity
+#    parameters:
+#      name: pwp_001_velocity
+#      joint: pwp_001_joint
+#      gear: 1
+#      forcelimited: false
+#      ctrllimited: false
+#      kv: 1.0e8
