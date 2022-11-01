@@ -25,12 +25,31 @@ worldbody:
           - 
             label: mu1_002
             joint:
-              type: ball 
-              parameters:
-                limited: false
-                springref: 0
-                stiffness: 5.0e9
-                damping: 1.0e7
+              - 
+                type: hinge
+                label: axis1
+                parameters:
+                  axis: HingeAxis1DatumLine
+                  limited: false
+                  springref: 0
+                  stiffness: 5.0e9
+                  damping: 1.0e7 
+              - 
+                type: hinge
+                label: axis2
+                parameters:
+                  axis: HingeAxis2DatumLine
+                  limited: false
+                  springref: 0
+                  stiffness: 5.0e9
+                  damping: 1.0e7  
+
+              #type: ball 
+              #parameters:
+              #  limited: false
+              #  springref: 0
+              #  stiffness: 5.0e9
+              #  damping: 1.0e7
       - 
         label: scu_001
         joint: 
@@ -60,7 +79,8 @@ worldbody:
                 type: hinge
                 label: alpha
                 parameters:
-                    axis:  [0.0, -1.0, 0.0]
+                    #axis:  [0.0, -1.0, 0.0]
+                    axis: AlphaAxisDatumLine
                     limited: false
                     springref: 0
                     stiffness: 0.1
@@ -69,7 +89,8 @@ worldbody:
                 type: hinge
                 label: phi 
                 parameters:
-                    axis:  [0.0, 0.0, -1.0]
+                    #axis:  [0.0, 0.0, -1.0]
+                    axis: PhiAxisDatumLine
                     limited: false
                     springref: 0
                     stiffness: 0.1 
@@ -78,7 +99,8 @@ worldbody:
                 type: hinge
                 label: theta 
                 parameters:
-                    axis:  [1.0, 0.0, 0.0]
+                    #axis:  [1.0, 0.0, 0.0]
+                    axis: ThetaAxisDatumLine
                     limited: false
                     springref: 0
                     stiffness: 0.1
