@@ -32,7 +32,7 @@ worldbody:
                   axis: HingeAxis1DatumLine
                   limited: false
                   springref: 0
-                  stiffness: 5.0e9
+                  stiffness: 6.0e9
                   damping: 1.0e7 
               - 
                 type: hinge
@@ -41,15 +41,9 @@ worldbody:
                   axis: HingeAxis2DatumLine
                   limited: false
                   springref: 0
-                  stiffness: 5.0e9
-                  damping: 1.0e7  
+                  stiffness: 6.0e9
+                  damping: 1.0e7 
 
-              #type: ball 
-              #parameters:
-              #  limited: false
-              #  springref: 0
-              #  stiffness: 5.0e9
-              #  damping: 1.0e7
       - 
         label: scu_001
         joint: 
@@ -62,53 +56,54 @@ worldbody:
           - 
             label: mu1_001
             joint:
-              type: ball 
-              parameters:
-                limited: false
-                springref: 0
-                stiffness: 5.0e9
-                damping: 1.0e7
+              - 
+                type: hinge
+                label: axis1
+                parameters:
+                  axis: HingeAxis1DatumLine
+                  limited: false
+                  springref: 0
+                  stiffness: 6.0e9
+                  damping: 1.0e7 
+              - 
+                type: hinge
+                label: axis2
+                parameters:
+                  axis: HingeAxis2DatumLine
+                  limited: false
+                  springref: 0
+                  stiffness: 6.0e9
+                  damping: 1.0e7 
+
       - 
         label: pwp_001
         children: 
           - 
             label: ax1_and_vein_001
-            density: 0.0001
+            density: 1.0e-3
             joint:
               - 
                 type: hinge
                 label: alpha
                 parameters:
-                    #axis:  [0.0, -1.0, 0.0]
                     axis: AlphaAxisDatumLine
                     limited: false
-                    springref: 0
-                    stiffness: 0.1
-                    damping: 0.1
               - 
                 type: hinge
                 label: phi 
                 parameters:
-                    #axis:  [0.0, 0.0, -1.0]
                     axis: PhiAxisDatumLine
                     limited: false
-                    springref: 0
-                    stiffness: 0.1 
-                    damping: 0.1 
               - 
                 type: hinge
                 label: theta 
                 parameters:
-                    #axis:  [1.0, 0.0, 0.0]
                     axis: ThetaAxisDatumLine
                     limited: false
-                    springref: 0
-                    stiffness: 0.1
-                    damping: 0.1
             children:
               - 
                 label: wing_001
-                density: 0.0001
+                density: 1.0e-3
 
 equality:
   -
@@ -117,7 +112,7 @@ equality:
       body1: mu1_001
       body2: ax1_and_vein_001
       anchor: ScuBallCenterDatumPoint
-      solimp: [0.9999999, 0.9999999, 0.001, 0.5, 2.0] 
+      solimp: [1.0, 1.0, 0.001, 0.5, 2.0] 
 
   -
     type: connect
@@ -125,7 +120,7 @@ equality:
       body1: mu1_002
       body2: ax1_and_vein_001
       anchor: SlaBallCenterDatumPoint
-      solimp: [0.9999999, 0.9999999, 0.001, 0.5, 2.0] 
+      solimp: [1.0, 1.0, 0.001, 0.5, 2.0] 
 
 
 actuator:
