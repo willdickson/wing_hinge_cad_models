@@ -43,6 +43,23 @@ worldbody:
                   springref: 0
                   stiffness: 6.0e9
                   damping: 1.0e7 
+          - 
+            label: ax34_001 
+            joint:
+              - 
+                type: hinge
+                label: axis1
+                parameters:
+                  axis: Ax3HingeAxis1DatumLine
+                  limited: false
+                  springref: 0
+              - 
+                type: hinge
+                label: axis2
+                parameters:
+                  axis: Ax3HingeAxis2DatumLine
+                  limited: false
+                  springref: 0
 
       - 
         label: scu_001
@@ -120,6 +137,14 @@ equality:
       body1: mu1_002
       body2: ax1_and_vein_001
       anchor: SlaBallCenterDatumPoint
+      solimp: [1.0, 1.0, 0.001, 0.5, 2.0] 
+
+  -
+    type: connect
+    parameters:
+      body1: ax34_001
+      body2: ax1_and_vein_001
+      anchor: Ax3BallCenterDatumPoint
       solimp: [1.0, 1.0, 0.001, 0.5, 2.0] 
 
 
