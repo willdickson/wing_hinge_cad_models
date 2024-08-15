@@ -1,0 +1,246 @@
+compiler:
+  angle: radian
+
+option:
+  gravity: [0.0, 0.0, -9.81]
+  timestep: 0.005
+
+worldbody: 
+
+  body_tree:
+    label: mount_plate_001
+    joint: 
+      type: freejoint
+      position: WorldBodyDatumPoint
+    children:
+      - 
+        label: sla_001
+        #density: 1.0
+        joint:
+          type: hinge
+          parameters:
+            axis: SlaJointDatumLine
+            limited: false 
+            springref: 0
+        children: 
+          - 
+            label: mu1_002
+            density: 1.0e-3
+            joint:
+              - 
+                type: hinge
+                label: axis1
+                parameters:
+                  axis: HingeAxis1DatumLine
+                  limited: false
+                  springref: 0
+              - 
+                type: hinge
+                label: axis2
+                parameters:
+                  axis: HingeAxis2DatumLine
+                  limited: false
+                  springref: 0
+          - 
+            label: ax4_and_canoe_001 
+            density: 1.0e-3
+            joint:
+              - 
+                type: hinge
+                label: axis1
+                parameters:
+                  axis: Ax3HingeAxis1DatumLine
+                  limited: false
+                  springref: 0
+              - 
+                type: hinge
+                label: axis2
+                parameters:
+                  axis: Ax3HingeAxis2DatumLine
+                  limited: false
+                  springref: 0
+
+            children: 
+              -
+                label: ax3_001
+                density: 1.0e-3
+                joint:
+                  type: slide
+                  label: slide
+                  parameters:
+                    axis: SliderAxisDatumLine
+                    limited: false
+                    springref: 0
+              -
+                label: ax4_001
+                density: 1.0e-3
+
+              -
+                label: canoe_001
+                density: 1.0e-3
+
+      - 
+        label: scu_001
+        #density: 1.0
+        joint: 
+          type: slide
+          parameters:
+            axis: ScuJointDatumLine
+            limited: false 
+            springref: 0
+        children: 
+          - 
+            label: mu1_001
+            density: 1.0e-3
+            joint:
+              - 
+                type: hinge
+                label: axis1
+                parameters:
+                  axis: HingeAxis1DatumLine
+                  limited: false
+                  springref: 0
+              - 
+                type: hinge
+                label: axis2
+                parameters:
+                  axis: HingeAxis2DatumLine
+                  limited: false
+                  springref: 0
+
+      - 
+        label: pwp_001
+        density: 1.0e-3
+        children: 
+          - 
+            label: ax1_and_vein_001
+            density: 1.0e-3
+            joint:
+              - 
+                type: hinge
+                label: alpha
+                parameters:
+                    axis: AlphaAxisDatumLine
+                    limited: false
+              - 
+                type: hinge
+                label: phi 
+                parameters:
+                    axis: PhiAxisDatumLine
+                    limited: false
+              - 
+                type: hinge
+                label: theta 
+                parameters:
+                    axis: ThetaAxisDatumLine
+                    limited: false
+            children:
+              - 
+                label: wing_001
+                density: 1.0e-3
+
+              - 
+                label: ax1_001
+                density: 1.0e-3
+
+              - 
+                label: ax2_001
+                density: 1.0e-3
+
+              - 
+                label: vein_001
+                density: 1.0e-3
+
+
+equality:
+  -
+    type: connect
+    parameters:
+      body1: mu1_001
+      body2: ax1_and_vein_001
+      anchor: ScuBallCenterDatumPoint
+      solimp: [1.0, 1.0, 0.001, 0.5, 2.0] 
+
+  -
+    type: connect
+    parameters:
+      body1: mu1_002
+      body2: ax1_and_vein_001
+      anchor: SlaBallCenterDatumPoint
+      solimp: [1.0, 1.0, 0.001, 0.5, 2.0] 
+
+  -
+    type: connect
+    parameters:
+      body1: ax3_001
+      body2: ax1_and_vein_001
+      anchor: Ax3BallCenterDatumPoint
+      solimp: [1.0, 1.0, 0.001, 0.5, 2.0] 
+
+
+actuator:
+
+  -
+    type: position
+    parameters:
+      name: sla_001_position
+      joint: sla_001_joint
+      gear: 1
+      forcelimited: false
+      ctrllimited: false
+      kp: 6.0e11 
+      #kp: 8.0e8
+
+  -
+    type: velocity
+    parameters:
+      name: sla_001_velocity
+      joint: sla_001_joint
+      gear: 1
+      forcelimited: false
+      ctrllimited: false
+      kv: 1.0e10
+      #kv: 3.0e7 
+
+  -
+    type: position
+    parameters:
+      name: scu_001_position
+      joint: scu_001_joint
+      gear: 1
+      forcelimited: false
+      ctrllimited: false
+      kp: 6.0e8
+      #kp: 1.0e6
+
+  -
+    type: velocity
+    parameters:
+      name: scu_001_velocity
+      joint: scu_001_joint
+      gear: 1
+      forcelimited: false
+      ctrllimited: false
+      kv: 1.0e8
+      #kv: 1.0e5
+
+  -
+    type: position
+    parameters:
+      name: ax3_001_position
+      joint: ax3_001_joint
+      gear: 1
+      forcelimited: false
+      ctrllimited: false
+      kp: 3.0e5
+
+  -
+    type: velocity 
+    parameters:
+      name: ax3_001_velocity
+      joint: ax3_001_joint
+      gear: 1
+      forcelimited: false
+      ctrllimited: false
+      kv: 1.0e4
+
